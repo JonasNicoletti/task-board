@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Container, Button, Typography, Toolbar, AppBar, makeStyles, IconButton } from '@material-ui/core';
+import { Button, Typography, Toolbar, AppBar, makeStyles, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 const Layout = (props) => {
 
@@ -28,16 +28,16 @@ const Layout = (props) => {
                         </IconButton>
                     </NavLink>
                     <Typography variant="h6" className={classes.title}>
-                        T-B
+                        Task-Board
                     </Typography>
                     <NavLink to="/auth">
                         <Button >Login</Button>
                     </NavLink>
                 </Toolbar>
             </AppBar>
-            <Container>
+            <div>
                 {props.children}
-            </Container>
+            </div>
         </div>
     );
 }
