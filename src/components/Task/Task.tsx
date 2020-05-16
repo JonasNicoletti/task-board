@@ -6,7 +6,7 @@ import ArrowRight from '@material-ui/icons/ArrowRight';
 
 
 
-const Task = (props) => {
+const Task = ({state, title, moveLeft, moveRight}) => {
     const shadowColors = [
         'rgb(242, 11, 11)',
         'rgb(242, 119, 11)',
@@ -20,7 +20,7 @@ const Task = (props) => {
             maxWidth: '250px'
         },
         card: {
-            boxShadow: `2px 2px 1px 1px ${shadowColors[props.state]},1px 1px 1px 1px ${shadowColors[props.state]},0px 1px 10px 1px ${shadowColors[props.state]}`
+            boxShadow: `2px 2px 1px 1px ${shadowColors[state]},1px 1px 1px 1px ${shadowColors[state]},0px 1px 10px 1px ${shadowColors[state]}`
         },
         cardActions: {
             width: '100%'
@@ -36,14 +36,14 @@ const Task = (props) => {
         <Container className={classes.root}>
             <Card color='primary' className={classes.card}>
                 <CardContent>
-                    <Typography variant='h5' component='h2' align='center'>{props.title}</Typography>
+                    <Typography variant='h5' component='h2' align='center'>{title}</Typography>
                 </CardContent>
                 <CardActions >
                     <Box display="flex" className={classes.cardActions}>
-                        <IconButton onClick={props.moveLeft}>
+                        <IconButton onClick={moveLeft}>
                             <ArrowLeft />
                         </IconButton>
-                        <IconButton className={classes.cardAction} onClick={props.moveRight}>
+                        <IconButton className={classes.cardAction} onClick={moveRight}>
                             <ArrowRight />
                         </IconButton>
                     </Box>
