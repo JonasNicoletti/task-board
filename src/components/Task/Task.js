@@ -5,7 +5,8 @@ import ArrowRight from '@material-ui/icons/ArrowRight';
 
 const useStyles = makeStyles({
     root: {
-        padding: '24px'
+        padding: '24px',
+        maxWidth: '250px'
     },
     cardActions: {
         width: '100%'
