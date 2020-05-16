@@ -12,7 +12,6 @@ function App() {
         <Route path="/auth" exact component={Auth} />
         <Route path="/" exact component={TaskBoard} />
       </Switch>
-    
     </Layout>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import { Provider } from 'react-redux'
 
 import './index.css';
@@ -11,6 +11,7 @@ import { createStore } from 'redux';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 import { BrowserRouter } from 'react-router-dom';
+import { CssBaseline } from '@material-ui/core';
 
 const store = createStore(
   taskReducer
@@ -19,9 +20,10 @@ const store = createStore(
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
+      <MuiThemeProvider theme={responsiveFontSizes(theme)}>
+        <CssBaseline />
         <App />
-      </ThemeProvider>
+      </MuiThemeProvider>
     </BrowserRouter>
   </Provider>
 )

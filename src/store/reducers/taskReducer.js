@@ -1,36 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    tasks: [{
-        title: "Task 1",
-        id: Math.random(),
-        state: 0
-    },
-    {
-        title: "Task 2",
-        id: Math.random(),
-        state: 0
-    },
-    {
-        title: "Task 8",
-        id: Math.random(),
-        state: 1
-    },
-    {
-        title: "Task 4",
-        id: Math.random(),
-        state: 2
-    },
-    {
-        title: "Task 5",
-        id: Math.random(),
-        state: 2
-    },
-    {
-        title: "Task 6",
-        id: Math.random(),
-        state: 3
-    }]
+    tasks: []
 };
 
 const reducer = (state = initialState, action) => {
