@@ -21,8 +21,7 @@
     "eject": "react-scripts eject",
     "cypress": "cypress open",
     "cy:run": "cypress run",
-    "test": "start-server-and-test start http://localhost:3000 cy:run",
-    "cy:ci": "start-server-and-test start http://localhost:3000 cy:run"
+    "cy:ci": "start-server-and-test start http://localhost:3000 cy:run --record --key 818ae7e3-f5d4-4111-b08d-a4550c9704e7"
   },
   "eslintConfig": {
     "extends": "react-app"
