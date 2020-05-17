@@ -1,7 +1,7 @@
 describe('create a new task', () => {
 
     it('open modal when click on open', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit('/');
 
         cy
             .get('#create-task-modal')
@@ -18,7 +18,7 @@ describe('create a new task', () => {
     });
 
     it('close modal when click on close button', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit('/');
 
         cy
             .get('#open-create-task-modal-button')
@@ -38,7 +38,7 @@ describe('create a new task', () => {
     });
 
     it('validate input when click on save button', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit('/');
 
         cy
             .get('#open-create-task-modal-button')
@@ -61,7 +61,7 @@ describe('create a new task', () => {
 
         const typedText = 'Task Title';
 
-        cy.visit('http://localhost:3000');
+        cy.visit('/');
 
         cy
             .get('#task-title')

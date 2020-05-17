@@ -1,7 +1,7 @@
 describe('move task', () => {
 
     before(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('/');
         cy
             .get('#open-create-task-modal-button')
             .click();

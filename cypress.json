@@ -1,3 +1,4 @@
 {
-  "projectId": "dpxfux"
+  "projectId": "dpxfux",
+  "baseUrl": "http://localhost:3000"
 }
