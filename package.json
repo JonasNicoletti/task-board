@@ -20,9 +20,9 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --record --key 818ae7e3-f5d4-4111-b08d-a4550c9704e7",
     "cypress:verify": "cypress verify",
-    "ci:cypress-run": "start-server-and-test 'start' 'http://localhost:3000' 'npm run cypress:run  --record --key 818ae7e3-f5d4-4111-b08d-a4550c9704e7'"
+    "ci:cypress-run": "start-server-and-test 'start' 'http://localhost:3000' 'npm run cypress:run'"
   },
   "eslintConfig": {
     "extends": "react-app"
