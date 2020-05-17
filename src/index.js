@@ -19,7 +19,7 @@ const store = createStore(
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/task-board">
       <MuiThemeProvider theme={responsiveFontSizes(theme)}>
         <CssBaseline />
         <App />
