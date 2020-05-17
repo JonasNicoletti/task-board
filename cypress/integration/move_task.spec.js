@@ -1,132 +1,129 @@
+/* eslint-disable no-undef */
 describe('move task', () => {
+  before(() => {
+    cy.visit('/')
+    cy
+      .get('#open-create-task-modal-button')
+      .click()
+    cy
+      .get('#modal-title')
+      .type('Title')
 
-    before(() => {
-        cy.visit('/');
-        cy
-            .get('#open-create-task-modal-button')
-            .click();
-        cy
-            .get('#modal-title')
-            .type('Title');
+    cy
+      .get('#save-create-task-modal-button')
+      .click()
+  })
 
-        cy
-            .get('#save-create-task-modal-button')
-            .click();
-    });
+  it(' moving task backwars when in 1st column does not change the tasks state', () => {
+    // one task in the first column
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .children()
+      .first()
+      .next()
+      .children()
+      .should('have.length', 1)
 
-    it(' moving task backwars when in 1st column does not change the tasks state', () => {
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .children()
+      .first()
+      .next()
+      .get('#move-task-backward')
+      .click()
 
-        // one task in the first column
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .children()
-            .first()
-            .next()
-            .children()
-            .should('have.length', 1);
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .children()
+      .first()
+      .next()
+      .children()
+      .should('have.length', 1)
+  })
 
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .children()
-            .first()
-            .next()
-            .get('#move-task-backward')
-            .click();
+  it(' moving task', () => {
+    // one task in first column
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .children()
+      .first()
+      .next()
+      .children()
+      .should('have.length', 1)
 
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .children()
-            .first()
-            .next()
-            .children()
-            .should('have.length', 1);
-    });
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .children()
+      .first()
+      .next()
+      .get('#move-task-forward')
+      .click()
 
-    it(' moving task', () => {
+    // zero task in the first column
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .children()
+      .first()
+      .next()
+      .children()
+      .should('have.length', 0)
 
-        // one task in first column
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .children()
-            .first()
-            .next()
-            .children()
-            .should('have.length', 1);
+    // one task in the second column
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .next()
+      .children()
+      .first()
+      .next()
+      .children()
+      .should('have.length', 1)
 
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .children()
-            .first()
-            .next()
-            .get('#move-task-forward')
-            .click();
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .next()
+      .children()
+      .first()
+      .next()
+      .get('#move-task-backward')
+      .click()
 
-        // zero task in the first column
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .children()
-            .first()
-            .next()
-            .children()
-            .should('have.length', 0);
+    // zero task in the second column
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .next()
+      .children()
+      .first()
+      .next()
+      .children()
+      .should('have.length', 0)
 
-        // one task in the second column
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .next()
-            .children()
-            .first()
-            .next()
-            .children()
-            .should('have.length', 1);
-
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .next()
-            .children()
-            .first()
-            .next()
-            .get('#move-task-backward')
-            .click();
-
-        // zero task in the second column
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .next()
-            .children()
-            .first()
-            .next()
-            .children()
-            .should('have.length', 0);
-
-        // one task in the first column
-        cy
-            .get('#dashboard')
-            .children()
-            .first()
-            .children()
-            .first()
-            .next()
-            .children()
-            .should('have.length', 1);
-    });
-
+    // one task in the first column
+    cy
+      .get('#dashboard')
+      .children()
+      .first()
+      .children()
+      .first()
+      .next()
+      .children()
+      .should('have.length', 1)
+  })
 })

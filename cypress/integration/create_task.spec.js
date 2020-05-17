@@ -1,95 +1,93 @@
+/* eslint-disable no-undef */
 describe('create a new task', () => {
+  it('open modal when click on open', () => {
+    cy.visit('/')
 
-    it('open modal when click on open', () => {
-        cy.visit('/');
+    cy
+      .get('#create-task-modal')
+      .should('not.be.visible')
 
-        cy
-            .get('#create-task-modal')
-            .should('not.be.visible');
+    cy
+      .get('#open-create-task-modal-button')
+      .click()
 
-        cy
-            .get('#open-create-task-modal-button')
-            .click();
+    cy
+      .get('#create-task-modal')
+      .should('be.visible')
+  })
 
-        cy
-            .get('#create-task-modal')
-            .should('be.visible');
+  it('close modal when click on close button', () => {
+    cy.visit('/')
 
-    });
+    cy
+      .get('#open-create-task-modal-button')
+      .click()
 
-    it('close modal when click on close button', () => {
-        cy.visit('/');
+    cy
+      .get('#create-task-modal')
+      .should('be.visible')
 
-        cy
-            .get('#open-create-task-modal-button')
-            .click();
+    cy
+      .get('#close-create-task-modal-button')
+      .click()
 
-        cy
-            .get('#create-task-modal')
-            .should('be.visible');
+    cy
+      .get('#create-task-modal')
+      .should('not.be.visible')
+  })
 
-        cy
-            .get('#close-create-task-modal-button')
-            .click();
+  it('validate input when click on save button', () => {
+    cy.visit('/')
 
-        cy
-            .get('#create-task-modal')
-            .should('not.be.visible');
-    });
+    cy
+      .get('#open-create-task-modal-button')
+      .click()
 
-    it('validate input when click on save button', () => {
-        cy.visit('/');
+    cy
+      .get('#create-task-modal')
+      .should('be.visible')
 
-        cy
-            .get('#open-create-task-modal-button')
-            .click();
+    cy
+      .get('#save-create-task-modal-button')
+      .click()
 
-        cy
-            .get('#create-task-modal')
-            .should('be.visible');
+    cy
+      .get('#create-task-modal')
+      .should('be.visible')
+  })
 
-        cy
-            .get('#save-create-task-modal-button')
-            .click();
+  it('create task when click on save button', () => {
+    const typedText = 'Task Title'
 
-        cy
-            .get('#create-task-modal')
-            .should('be.visible');
-    });
+    cy.visit('/')
 
-    it('create task when click on save button', () => {
+    cy
+      .get('#task-title')
+      .should('not.be.visible')
 
-        const typedText = 'Task Title';
+    cy
+      .get('#open-create-task-modal-button')
+      .click()
 
-        cy.visit('/');
+    cy
+      .get('#create-task-modal')
+      .should('be.visible')
 
-        cy
-            .get('#task-title')
-            .should('not.be.visible');
+    cy
+      .get('#modal-title')
+      .type(typedText)
+      .should('have.value', typedText)
 
-        cy
-            .get('#open-create-task-modal-button')
-            .click();
+    cy
+      .get('#save-create-task-modal-button')
+      .click()
 
-        cy
-            .get('#create-task-modal')
-            .should('be.visible');
+    cy
+      .get('#create-task-modal')
+      .should('not.be.visible')
 
-        cy
-            .get('#modal-title')
-            .type(typedText)
-            .should('have.value', typedText);
-
-        cy
-            .get('#save-create-task-modal-button')
-            .click();
-
-        cy
-            .get('#create-task-modal')
-            .should('not.be.visible');
-
-        cy
-            .get('#task-title')
-            .contains(typedText);
-    });
+    cy
+      .get('#task-title')
+      .contains(typedText)
+  })
 })

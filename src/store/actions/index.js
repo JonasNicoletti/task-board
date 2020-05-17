@@ -1,1 +1,1 @@
-export { moveForward, moveBackward, addNew } from './task';
+export { moveForward, moveBackward, addNew } from './task'
