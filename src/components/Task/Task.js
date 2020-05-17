@@ -36,14 +36,14 @@ const Task = (props) => {
         <Container className={classes.root}>
             <Card color='primary' className={classes.card}>
                 <CardContent>
-                    <Typography variant='h5' component='h2' align='center'>{props.title}</Typography>
+                    <Typography id='task-title' variant='h5' component='h2' align='center'>{props.title}</Typography>
                 </CardContent>
                 <CardActions >
                     <Box display="flex" className={classes.cardActions}>
-                        <IconButton onClick={props.moveLeft}>
+                        <IconButton onClick={props.moveLeft} id="move-task-backward">
                             <ArrowLeft />
                         </IconButton>
-                        <IconButton className={classes.cardAction} onClick={props.moveRight}>
+                        <IconButton className={classes.cardAction} onClick={props.moveRight} id="move-task-forward">
                             <ArrowRight />
                         </IconButton>
                     </Box>

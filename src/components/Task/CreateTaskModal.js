@@ -39,6 +39,7 @@ const CreateTaskModal = (props) => {
 
     return (
         <Modal
+            id='create-task-modal'
             className={classes.modal}
             open={props.open}
             aria-labelledby='modal-title'
@@ -60,6 +61,7 @@ const CreateTaskModal = (props) => {
                     fullWidth />
                 <div id='modal-body' className={classes.actions} >
                     <Button
+                        id='close-create-task-modal-button'
                         variant='outlined'
                         color='secondary'
                         size='small'
@@ -68,6 +70,7 @@ const CreateTaskModal = (props) => {
                         CANCEL
                     </Button>
                     <Button
+                        id='save-create-task-modal-button'
                         variant='outlined'
                         color='primary'
                         size='small'

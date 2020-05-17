@@ -53,7 +53,7 @@ const Layout = (props) => {
                     <Typography variant="h6" className={classes.title}>
                         Task-Board
                     </Typography>
-                    <IconButton color="inherit" onClick={handleOpen}>
+                    <IconButton id='open-create-task-modal-button' color="inherit" onClick={handleOpen}>
                         <AddIcon/>
                     </IconButton>
                     <NavLink to="/auth" className={classes.auth}>

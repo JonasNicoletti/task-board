@@ -13,7 +13,7 @@ const TaskBoard = (props) => {
     const doneTasks = props.tasks.filter(t => t.state === 3);
     return (
         <div>
-            <Grid container spacing={0}>
+            <Grid container spacing={0} id="dashboard">
                 <TaskBoardColumn title={"TO-DO"} tasks={todoTasks} moveLeft={() => { }} moveRight={(taskId) => props.onTaskMovedForward(taskId)} />
                 <TaskBoardColumn title={"IN PROGRESS"} tasks={inProgressTasks} moveLeft={(taskId) => props.onTaskMovedBackward(taskId)} moveRight={(taskId) => props.onTaskMovedForward(taskId)} />
                 <TaskBoardColumn title={"REVIEW"} tasks={reviewTasks} moveLeft={(taskId) => props.onTaskMovedBackward(taskId)} moveRight={(taskId) => props.onTaskMovedForward(taskId)} />
