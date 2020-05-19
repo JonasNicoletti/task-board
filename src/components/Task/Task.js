@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Typography, CardContent, Container, makeStyles, IconButton, CardActions, Box } from '@material-ui/core'
+import { useDrag } from 'react-dnd'
 import ArrowLeft from '@material-ui/icons/ArrowLeft'
 import ArrowRight from '@material-ui/icons/ArrowRight'
 import PropTypes from 'prop-types'
@@ -11,6 +12,13 @@ const Task = (props) => {
     'rgb(242, 238, 11)',
     'rgb(94, 242, 11)'
   ]
+
+  const [{ opacity }, dragRef] = useDrag({
+    item: { type: 'task', id: props.id},
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  })
 
   const useStyles = makeStyles({
     root: {
@@ -30,17 +38,17 @@ const Task = (props) => {
   const classes = useStyles()
 
   return (
-    <Container className={classes.root}>
+    <Container className={classes.root} ref={dragRef} style={{ opacity }}>
       <Card color='primary' className={classes.card}>
         <CardContent>
           <Typography id='task-title' variant='h5' component='h2' align='center'>{props.title}</Typography>
         </CardContent>
         <CardActions >
           <Box display="flex" className={classes.cardActions}>
-            <IconButton onClick={props.moveLeft} id="move-task-backward">
+            <IconButton onClick={() => props.moveTask(props.id, props.state - 1)} id="move-task-backward">
               <ArrowLeft />
             </IconButton>
-            <IconButton className={classes.cardAction} onClick={props.moveRight} id="move-task-forward">
+            <IconButton className={classes.cardAction} onClick={() => props.moveTask(props.id, props.state + 1)} id="move-task-forward">
               <ArrowRight />
             </IconButton>
           </Box>
@@ -51,10 +59,11 @@ const Task = (props) => {
 }
 
 Task.propTypes = {
-  moveRight: PropTypes.func,
-  moveLeft: PropTypes.func,
+  moveTask: PropTypes.func,
   state: PropTypes.number,
-  title: PropTypes.string
+  title: PropTypes.string,
+  id: PropTypes.number,
+  isDragging: PropTypes.bool
 }
 
 export default Task

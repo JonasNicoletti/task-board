@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography, Grid, Box, makeStyles } from '@material-ui/core'
 import Task from '../../../components/Task/Task'
 import PropTypes from 'prop-types'
+import { useDrop } from 'react-dnd'
 
 const TaskBoardColumn = (props) => {
   const useStyles = makeStyles({
@@ -19,16 +20,30 @@ const TaskBoardColumn = (props) => {
     }
   })
 
+  const [, drop] = useDrop({
+    accept: 'task',
+    drop: (data) => props.moveTask(data.id, props.state),
+    collect: mon => ({
+      isOver: !!mon.isOver(),
+    }),
+  })
+
   const classes = useStyles()
   const tasks = props.tasks
-    .map(task => <Task title={task.title} state={task.state} key={task.id} moveLeft={() => props.moveLeft(task.id)} moveRight={() => props.moveRight(task.id)} />)
+    .map(task => <Task 
+      title={task.title}
+      state={task.state} 
+      id={task.id} 
+      key={task.id} 
+      moveTask={props.moveTask} 
+      />)
     .reduce((arr, el) => arr.concat(el), [])
   return (
     <Grid item xs className={classes.column}
     >
       <Box
         className={classes.header}
-        borderRight={props.borderRight}
+        borderRight={props.borderRight ? 1 : 0}
         borderBottom={1}
         borderLeft={1}
         borderTop={1}
@@ -38,8 +53,9 @@ const TaskBoardColumn = (props) => {
         </Typography>
       </Box>
       <Box
+        ref={drop}
         className={classes.body}
-        borderRight={props.borderRight}
+        borderRight={props.borderRight ? 1 : 0}
         borderBottom={1}
         borderLeft={1}>
         {tasks}
@@ -51,9 +67,9 @@ const TaskBoardColumn = (props) => {
 TaskBoardColumn.propTypes = {
   borderRight: PropTypes.bool,
   title: PropTypes.string,
+  state: PropTypes.number,
   tasks: PropTypes.array,
-  moveLeft: PropTypes.func,
-  moveRight: PropTypes.func
+  moveTask: PropTypes.func
 }
 
 export default TaskBoardColumn

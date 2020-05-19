@@ -12,6 +12,9 @@ import * as serviceWorker from './serviceWorker'
 import theme from './theme'
 import { BrowserRouter } from 'react-router-dom'
 import { CssBaseline } from '@material-ui/core'
+import { DndProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
+
 
 const store = createStore(
   taskReducer
@@ -19,12 +22,14 @@ const store = createStore(
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter basename="/task-board">
-      <MuiThemeProvider theme={responsiveFontSizes(theme)}>
-        <CssBaseline />
-        <App />
-      </MuiThemeProvider>
-    </BrowserRouter>
+    <DndProvider backend={Backend}>
+      <BrowserRouter basename="/task-board">
+        <MuiThemeProvider theme={responsiveFontSizes(theme)}>
+          <CssBaseline />
+          <App />
+        </MuiThemeProvider>
+      </BrowserRouter>
+    </DndProvider>
   </Provider>
 )
 

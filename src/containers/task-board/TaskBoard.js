@@ -7,17 +7,25 @@ import TaskBoardColumn from './task-board-column/TaskBoardColumn'
 import * as actions from '../../store/actions'
 
 const TaskBoard = (props) => {
-  const todoTasks = props.tasks.filter(t => t.state === 0)
-  const inProgressTasks = props.tasks.filter(t => t.state === 1)
-  const reviewTasks = props.tasks.filter(t => t.state === 2)
-  const doneTasks = props.tasks.filter(t => t.state === 3)
+
+  const columns = props.states.map((state, index) => {
+    const tasks = props.tasks.filter(t => t.state === state.index)
+    return (
+      <TaskBoardColumn
+        key={index}
+        title={state.title}
+        state={state.index}
+        borderRight={index + 1 === props.states.length}
+        tasks={tasks}
+        moveTask={(taskId, newState) => props.onTaskMoved(taskId, newState)} />
+    )
+  })
+    .reduce((arr, el) => arr.concat(el), [])
+
   return (
     <div>
       <Grid container spacing={0} id="dashboard">
-        <TaskBoardColumn title={'TO-DO'} tasks={todoTasks} moveLeft={() => { }} moveRight={(taskId) => props.onTaskMovedForward(taskId)} />
-        <TaskBoardColumn title={'IN PROGRESS'} tasks={inProgressTasks} moveLeft={(taskId) => props.onTaskMovedBackward(taskId)} moveRight={(taskId) => props.onTaskMovedForward(taskId)} />
-        <TaskBoardColumn title={'REVIEW'} tasks={reviewTasks} moveLeft={(taskId) => props.onTaskMovedBackward(taskId)} moveRight={(taskId) => props.onTaskMovedForward(taskId)} />
-        <TaskBoardColumn title={'DONE'} tasks={doneTasks} borderRight={1} moveLeft={(taskId) => props.onTaskMovedBackward(taskId)} moveRight={() => { }} />
+        {columns}
       </Grid>
     </div>
   )
@@ -25,20 +33,19 @@ const TaskBoard = (props) => {
 
 TaskBoard.propTypes = {
   tasks: PropTypes.array,
-  onTaskMovedForward: PropTypes.func,
-  onTaskMovedBackward: PropTypes.func
+  onTaskMoved: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks
+    tasks: state.tasks,
+    states: state.states
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTaskMovedForward: (taskId) => dispatch(actions.moveForward(taskId)),
-    onTaskMovedBackward: (taskId) => dispatch(actions.moveBackward(taskId))
+    onTaskMoved: (taskId, newState) => dispatch(actions.moveTask(taskId, newState))
   }
 }
 

@@ -1,3 +1,3 @@
-export const TASK_MOVE_FORWARD = 'TASK_MOVE_FORWARD'
-export const TASK_MOVE_BACKWARD = 'TASK_MOVE_BACKWARD'
 export const TASK_ADD_NEW = 'TASK_ADD_NEW'
+export const TASK_MOVE = 'TASK_MOVE'
+
