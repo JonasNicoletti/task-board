@@ -21,4 +21,9 @@ script:
 before_deploy:
   - npm run predeploy
 deploy:
-  - npm run deploy
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: build
+  on:
+    branch: master
