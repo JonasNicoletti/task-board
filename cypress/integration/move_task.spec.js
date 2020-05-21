@@ -127,7 +127,7 @@ describe('move task', () => {
       .should('have.length', 1)
   })
 
-  it.only('move task using drag and drop', () => {
+  it('move task using drag and drop', () => {
     const dataTransfer = new DndSimulatorDataTransfer()
 
     cy
