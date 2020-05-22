@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 import moment from 'moment'
 
 const initialState = {
-  tasks: [{id:0, title:'Task', state: 1, createdAt: moment().subtract(20, 'days'), type:'TEST'}],
+  tasks: [],
   states: [{ index: 0, title: 'TO-DO' }, { index: 1, title: 'IN PROGRESS' }, { index: 2, title: 'REVIEW' }, { index: 3, title: 'DONE' }]
 }
 

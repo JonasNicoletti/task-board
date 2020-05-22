@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, Container, makeStyles, IconButton, CardActions, Box, CardHeader , Typography, Chip} from '@material-ui/core'
+import { Card, CardContent, Container, makeStyles, IconButton, CardActions, Box, CardHeader, Typography, Chip } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
 import { useDrag } from 'react-dnd'
@@ -50,17 +50,17 @@ const Task = (props) => {
     <Container className={classes.root} ref={dragRef} style={{ opacity }}>
       <Card color='primary' className={classes.card}>
         <CardContent>
-        <CardHeader
-        action={
-            <DragIndicatorIcon className={classes.dragIcon} fontSize='large'/>
-        }
-        title={<Box display="flex"><Typography align='left' variant='h4'>{props.task.title}</Typography><IconButton color='inherit' ><EditIcon/></IconButton></Box>}
-        subheader={
-        <Box display="flex">
-          <Chip size='small' label={props.task.type} className={classes.TypeChip}/>
-          <Typography variant="caption" display="block" gutterBottom>{moment(props.task.createdAt).fromNow()}</Typography>
-          </Box>}
-      />
+          <CardHeader
+            action={
+              <DragIndicatorIcon className={classes.dragIcon} fontSize='large' />
+            }
+            title={<Box display="flex"><Typography align='left' id='task-title' variant='h4'>{props.task.title}</Typography><IconButton color='inherit' ><EditIcon /></IconButton></Box>}
+            subheader={
+              <Box display="flex">
+                {props.task.type ? <Chip size='small' label={props.task.type} className={classes.TypeChip} /> : null}
+                <Typography variant="caption" display="block" gutterBottom>{moment(props.task.createdAt).fromNow()}</Typography>
+              </Box>}
+          />
         </CardContent>
         <CardActions >
           <Box display="flex" className={classes.cardActions}>
