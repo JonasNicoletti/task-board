@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, Container, makeStyles, IconButton, CardActions, Box, CardHeader, Typography, Chip } from '@material-ui/core'
+import { Card, CardContent, Container, makeStyles, IconButton, CardActions, Box, CardHeader, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
 import { useDrag } from 'react-dnd'
@@ -7,6 +7,8 @@ import ArrowLeft from '@material-ui/icons/ArrowLeft'
 import ArrowRight from '@material-ui/icons/ArrowRight'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+
+import TaskTypeChip from './TaskTypeChip'
 
 const Task = (props) => {
   const shadowColors = [
@@ -37,8 +39,8 @@ const Task = (props) => {
     cardAction: {
       marginLeft: 'auto'
     },
-    TypeChip: {
-      marginInlineEnd: '8px'
+    CreatedLabel: {
+      marginInlineStart: '8px'
     },
     dragIcon: {
       cursor: 'grab'
@@ -57,8 +59,8 @@ const Task = (props) => {
             title={<Box display="flex"><Typography align='left' id='task-title' variant='h4'>{props.task.title}</Typography><IconButton ><EditIcon /></IconButton></Box>}
             subheader={
               <Box display="flex">
-                {props.task.taskType ? <Chip size='small' label={props.task.taskType} className={classes.TypeChip} /> : null}
-                <Typography variant="caption" display="block" gutterBottom>{moment(props.task.createdAt).fromNow()}</Typography>
+                {props.task.taskType ? <TaskTypeChip  title={props.task.taskType.title} color={props.task.taskType.color} /> : null}
+                <Typography className={classes.CreatedLabel} variant="caption" display="block" gutterBottom>{moment(props.task.createdAt).fromNow()}</Typography>
               </Box>}
           />
         </CardContent>

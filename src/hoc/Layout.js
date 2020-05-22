@@ -61,7 +61,7 @@ const Layout = (props) => {
       </AppBar>
       <div>
         {props.children}
-        <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave} />
+        {open ? <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave}  taskTypes={props.taskTypes}/> : null }
       </div>
     </div>
   )
@@ -69,7 +69,14 @@ const Layout = (props) => {
 
 Layout.propTypes = {
   onTaskAdded: PropTypes.func,
+  taskTypes: PropTypes.array,
   children: PropTypes.node
+}
+
+const mapStateToProps = (state) => {
+  return {
+    taskTypes: state.taskTypes
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -78,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Layout)
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)
