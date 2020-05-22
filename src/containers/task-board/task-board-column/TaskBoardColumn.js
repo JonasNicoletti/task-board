@@ -30,10 +30,8 @@ const TaskBoardColumn = (props) => {
 
   const classes = useStyles()
   const tasks = props.tasks
-    .map(task => <Task 
-      title={task.title}
-      state={task.state} 
-      id={task.id} 
+    .map(task => <Task
+      task={task}
       key={task.id} 
       moveTask={props.moveTask} 
       />)

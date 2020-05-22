@@ -14,7 +14,6 @@ const Layout = (props) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
-      backgroundColor: theme.palette.background.paper
     },
     menuButton: {
       marginRight: theme.spacing(2)
@@ -42,18 +41,18 @@ const Layout = (props) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Toolbar>
           <NavLink to="/">
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <IconButton edge="start" className={classes.menuButton} aria-label="menu">
               <HomeIcon color="action" />
             </IconButton>
           </NavLink>
           <Typography variant="h6" className={classes.title}>
-                        Task-Board
+            Task-Board
           </Typography>
-          <IconButton id='open-create-task-modal-button' color="inherit" onClick={handleOpen}>
-            <AddIcon/>
+          <IconButton id='open-create-task-modal-button' onClick={handleOpen}>
+            <AddIcon />
           </IconButton>
           <NavLink to="/auth" className={classes.auth}>
             <Button >Login</Button>
@@ -62,7 +61,7 @@ const Layout = (props) => {
       </AppBar>
       <div>
         {props.children}
-        <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave}/>
+        <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave} />
       </div>
     </div>
   )

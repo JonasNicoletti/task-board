@@ -1,9 +1,9 @@
 import * as actionTypes from '../actions/actionTypes'
+import moment from 'moment'
 
 const initialState = {
-  tasks: [],
+  tasks: [{id:0, title:'Task', state: 1, createdAt: moment().subtract(20, 'days'), type:'TEST'}],
   states: [{ index: 0, title: 'TO-DO' }, { index: 1, title: 'IN PROGRESS' }, { index: 2, title: 'REVIEW' }, { index: 3, title: 'DONE' }]
-
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +13,8 @@ const reducer = (state = initialState, action) => {
       var newTask = {
         title: action.title,
         id: Math.random(),
-        state: 0
+        state: 0,
+        createdAt: moment()
       }
       return {
         ...state,
