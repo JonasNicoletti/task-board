@@ -14,7 +14,8 @@ const reducer = (state = initialState, action) => {
         title: action.title,
         id: Math.random(),
         state: 0,
-        createdAt: moment()
+        createdAt: moment(),
+        taskType: action.taskType
       }
       return {
         ...state,

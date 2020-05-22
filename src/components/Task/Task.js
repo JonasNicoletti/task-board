@@ -52,12 +52,12 @@ const Task = (props) => {
         <CardContent>
           <CardHeader
             action={
-              <DragIndicatorIcon className={classes.dragIcon} fontSize='large' />
+              <DragIndicatorIcon className={classes.dragIcon}/>
             }
-            title={<Box display="flex"><Typography align='left' id='task-title' variant='h4'>{props.task.title}</Typography><IconButton color='inherit' ><EditIcon /></IconButton></Box>}
+            title={<Box display="flex"><Typography align='left' id='task-title' variant='h4'>{props.task.title}</Typography><IconButton ><EditIcon /></IconButton></Box>}
             subheader={
               <Box display="flex">
-                {props.task.type ? <Chip size='small' label={props.task.type} className={classes.TypeChip} /> : null}
+                {props.task.taskType ? <Chip size='small' label={props.task.taskType} className={classes.TypeChip} /> : null}
                 <Typography variant="caption" display="block" gutterBottom>{moment(props.task.createdAt).fromNow()}</Typography>
               </Box>}
           />
@@ -79,7 +79,7 @@ const Task = (props) => {
 
 Task.propTypes = {
   moveTask: PropTypes.func,
-  task: PropTypes.node,
+  task: PropTypes.object,
   isDragging: PropTypes.bool
 }
 

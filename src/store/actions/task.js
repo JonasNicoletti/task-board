@@ -1,9 +1,10 @@
 import * as actionTypes from './actionTypes'
 
-export const addNew = (title) => {
+export const addNew = (title, taskType) => {
   return {
     type: actionTypes.TASK_ADD_NEW,
-    title: title
+    title: title,
+    taskType: taskType
   }
 }
 
