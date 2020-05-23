@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   content: {
-    width: 300,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -30,17 +29,22 @@ const useStyles = makeStyles((theme) => ({
 const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
   const classes = useStyles()
   const [title, setTitle] = React.useState('')
+  const [description, setDescription] = React.useState(null)
   const [category, setCategory] = React.useState(null);
 
   const filter = createFilterOptions()
 
-  const handleChange = (event) => {
+  const handleTitleChange = (event) => {
     setTitle(event.target.value)
+  } 
+  
+  const handleDescritionChange = (event) => {
+    setDescription(event.target.value)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    onSave(title, category)
+    onSave(title, category, description)
   }
 
   const resetFields = () => {
@@ -67,8 +71,9 @@ const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
           id='modal-title'
           label='Title'
           value={title}
-          onChange={handleChange}
+          onChange={handleTitleChange}
           required
+          fullWidth
         />
         <Autocomplete
         id='modal-category'
@@ -119,6 +124,14 @@ const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
             <TextField {...params} label="Category" />
           )}
           freeSolo
+        />
+        <TextField 
+        id='modal-description'
+        label="Description"
+        multiline
+        value={description}
+        onChange={handleDescritionChange}
+        rows={4}
         />
         <div id='modal-body' className={classes.actions} >
           <Button

@@ -50,9 +50,8 @@ const Task = (props) => {
 
   return (
     <Container className={classes.root} ref={dragRef} style={{ opacity }}>
-      <Card color='primary' className={classes.card}>
-        <CardContent>
-          <CardHeader
+      <Card  className={classes.card}>
+      <CardHeader
             action={
               <DragIndicatorIcon className={classes.dragIcon}/>
             }
@@ -63,6 +62,10 @@ const Task = (props) => {
                 <Typography className={classes.CreatedLabel} variant="caption" display="block" gutterBottom>{moment(props.task.createdAt).fromNow()}</Typography>
               </Box>}
           />
+        <CardContent>
+        <Typography variant="body2" gutterBottom>
+        {props.task.description}
+      </Typography>
         </CardContent>
         <CardActions >
           <Box display="flex" className={classes.cardActions}>

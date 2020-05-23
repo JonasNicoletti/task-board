@@ -24,7 +24,8 @@ const reducer = (state = initialState, action) => {
         id: Math.random(),
         state: 0,
         createdAt: moment(),
-        category: newCategory ? newCategory : action.category
+        category: newCategory ? newCategory : action.category,
+        description: action.description
       }
       return {
         ...state,
