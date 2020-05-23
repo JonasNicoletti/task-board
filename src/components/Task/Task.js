@@ -8,7 +8,7 @@ import ArrowRight from '@material-ui/icons/ArrowRight'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import TaskTypeChip from './TaskTypeChip'
+import TaskTypeChip from './CategoryChip'
 
 const Task = (props) => {
   const shadowColors = [
@@ -59,7 +59,7 @@ const Task = (props) => {
             title={<Box display="flex"><Typography align='left' id='task-title' variant='h4'>{props.task.title}</Typography><IconButton ><EditIcon /></IconButton></Box>}
             subheader={
               <Box display="flex">
-                {props.task.taskType ? <TaskTypeChip  title={props.task.taskType.title} color={props.task.taskType.color} /> : null}
+                {props.task.category ? <TaskTypeChip  title={props.task.category.title} color={props.task.category.color} /> : null}
                 <Typography className={classes.CreatedLabel} variant="caption" display="block" gutterBottom>{moment(props.task.createdAt).fromNow()}</Typography>
               </Box>}
           />

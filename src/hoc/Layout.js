@@ -33,8 +33,8 @@ const Layout = (props) => {
     setOpen(false)
   }
 
-  const handleSave = (title, taskType) => {
-    props.onTaskAdded(title, taskType)
+  const handleSave = (title, category) => {
+    props.onTaskAdded(title, category)
     setOpen(false)
   }
 
@@ -61,7 +61,7 @@ const Layout = (props) => {
       </AppBar>
       <div>
         {props.children}
-        {open ? <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave}  taskTypes={props.taskTypes}/> : null }
+        {open ? <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave}  categories={props.categories}/> : null }
       </div>
     </div>
   )
@@ -75,13 +75,13 @@ Layout.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    taskTypes: state.taskTypes
+    categories: state.categories
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTaskAdded: (title, taskType) => dispatch(actions.addNew(title, taskType))
+    onTaskAdded: (title, category) => dispatch(actions.addNew(title, category))
   }
 }
 

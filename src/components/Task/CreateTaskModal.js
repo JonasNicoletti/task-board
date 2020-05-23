@@ -5,7 +5,7 @@ import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete
 import SaveIcon from '@material-ui/icons/Save'
 import CloseIcon from '@material-ui/icons/Close'
 
-import TaskTypeChip from './TaskTypeChip'
+import TaskTypeChip from './CategoryChip'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CreateTaskModal = ({ onSave, open, onClose, taskTypes }) => {
+const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
   const classes = useStyles()
   const [title, setTitle] = React.useState('')
-  const [taskType, setType] = React.useState(null);
+  const [category, setCategory] = React.useState(null);
 
   const filter = createFilterOptions()
 
@@ -40,12 +40,12 @@ const CreateTaskModal = ({ onSave, open, onClose, taskTypes }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    onSave(title, taskType)
+    onSave(title, category)
   }
 
   const resetFields = () => {
     setTitle('')
-    setType(null)
+    setCategory(null)
   }
 
   return (
@@ -71,18 +71,19 @@ const CreateTaskModal = ({ onSave, open, onClose, taskTypes }) => {
           required
         />
         <Autocomplete
-          value={taskType}
+        id='modal-category'
+          value={category}
           onChange={(event, newValue) => {
             // Create a new value from the user input
             if (newValue && newValue.inputValue) {
-              setType({
+              setCategory({
                 title: newValue.inputValue,
               });
 
               return;
             }
 
-            setType(newValue);
+            setCategory(newValue);
           }}
           filterOptions={(options, params) => {
             const filtered = filter(options, params);
@@ -100,7 +101,7 @@ const CreateTaskModal = ({ onSave, open, onClose, taskTypes }) => {
           selectOnFocus
           clearOnBlur
           handleHomeEndKeys
-          options={taskTypes}
+          options={categories}
           getOptionLabel={(option) => {
             // Value selected with enter, right from the input
             if (typeof option === 'string') {
@@ -113,9 +114,9 @@ const CreateTaskModal = ({ onSave, open, onClose, taskTypes }) => {
             // Regular option
             return option.title;
           }}
-          renderOption={(option) => <TaskTypeChip title={option.title} color={option.color } />}
+          renderOption={(option) => <TaskTypeChip id={option.title} title={option.title} color={option.color } />}
           renderInput={(params) => (
-            <TextField {...params} label="Type" />
+            <TextField {...params} label="Category" />
           )}
           freeSolo
         />
@@ -148,7 +149,7 @@ CreateTaskModal.propTypes = {
   onSave: PropTypes.func,
   onClose: PropTypes.func,
   open: PropTypes.bool,
-  taskTypes: PropTypes.array
+  categories: PropTypes.array
 }
 
 export default CreateTaskModal

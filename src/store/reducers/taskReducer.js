@@ -4,8 +4,8 @@ import moment from 'moment'
 const initialState = {
   tasks: [],
   states: [{ index: 0, title: 'TO-DO' }, { index: 1, title: 'IN PROGRESS' }, { index: 2, title: 'REVIEW' }, { index: 3, title: 'DONE' }],
-  taskTypes: [],
-  taskTypesColors: ['#FF331F', '#3626A7', '#9c27b0', '#673ab7', '#009688', '#4caf50', '#ffeb3b', '#ff9800', '#795548']
+  categories: [],
+  categoriesColors: ['#FF331F', '#3626A7', '#9c27b0', '#673ab7', '#009688', '#4caf50', '#ffeb3b', '#ff9800', '#795548']
 } 
 
 const reducer = (state = initialState, action) => {
@@ -13,10 +13,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TASK_ADD_NEW:
 
-      if (action.taskType?.title && !action.taskType?.color) {
-        var newType = {
-          title: action.taskType.title,
-          color: state.taskTypesColors[0]
+      if (action.category?.title && !action.category?.color) {
+        var newCategory = {
+          title: action.category.title,
+          color: state.categoriesColors[0]
         }
       }
       var newTask = {
@@ -24,13 +24,13 @@ const reducer = (state = initialState, action) => {
         id: Math.random(),
         state: 0,
         createdAt: moment(),
-        taskType: newType ? newType : action.taskType
+        category: newCategory ? newCategory : action.category
       }
       return {
         ...state,
         tasks: state.tasks.concat(newTask),
-        taskTypes: newType ? state.taskTypes.concat(newType) :  [...state.taskTypes],
-        taskTypesColors: newType ? state.taskTypesColors.filter((_, index) => index > 0) : [...state.taskTypesColors]
+        categories: newCategory ? state.categories.concat(newCategory) :  [...state.categories],
+        categoriesColors: newCategory ? state.categoriesColors.filter((_, index) => index > 0) : [...state.categoriesColors]
 
 
       }
