@@ -23,7 +23,7 @@ const TitleField = (props) => {
 
   return props.isEdit ? (
     <TextField
-      id="task-title"
+      id="task-input-title"
       onChange={handleTitleChange}
       required
       fullWidth
@@ -37,7 +37,7 @@ const TitleField = (props) => {
     />
   ) : (
     <Box display="flex">
-      <Typography align="left" id="task-title" variant="h4">
+      <Typography align="left" class="task-title" variant="h4">
         {props.title}
       </Typography>
       <IconButton onClick={() => props.setIsEdit(true)}>

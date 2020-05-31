@@ -6,7 +6,7 @@ describe('move task', () => {
       .get('#open-create-task-modal-button')
       .click()
     cy
-      .get('#modal-title')
+      .get('#task-input-title')
       .type('Title')
 
     cy
