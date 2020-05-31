@@ -6,12 +6,12 @@ Reactjs app using:
  - _Cypress_ for testing
 
 ### TODO
-- task description
-- task details as pop-up or
-- edit task
-- sort task based on priority or oldest-newest first
-- connect to a Backend(RESTAPI or GraphQL ?)
-- add Auth
+- [x] task description-
+- [x] task details as text
+- [x] edit task
+- [ ] sort task based on priority or oldest-newest first
+- [ ] connect to a Backend(RESTAPI or GraphQL ?)
+- [ ] add Auth
 
 
 ### START THE APP
