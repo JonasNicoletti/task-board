@@ -134,7 +134,7 @@ describe("edit task", () => {
     cy.get(".task-description").should("be.visible").contains(typedDescription2);
   }); 
   
-  it.only("should not be able to save without title", () => {
+  it("should not be able to save without title", () => {
     const typedTitle = "title";
 
     cy.visit("/");
