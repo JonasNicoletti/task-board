@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Modal, makeStyles, TextField, Button } from '@material-ui/core'
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete'
+import { Modal, makeStyles, Button } from '@material-ui/core'
 import SaveIcon from '@material-ui/icons/Save'
 import CloseIcon from '@material-ui/icons/Close'
 
-import TaskTypeChip from './CategoryChip'
+import TitleField from './UI/TitleField'
+import CategoryField from './UI/CategoryField'
+import DescriptionField from './UI/DescriptionField'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,18 +30,8 @@ const useStyles = makeStyles((theme) => ({
 const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
   const classes = useStyles()
   const [title, setTitle] = React.useState('')
-  const [description, setDescription] = React.useState(null)
+  const [description, setDescription] = React.useState()
   const [category, setCategory] = React.useState(null);
-
-  const filter = createFilterOptions()
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value)
-  } 
-  
-  const handleDescritionChange = (event) => {
-    setDescription(event.target.value)
-  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -67,72 +58,9 @@ const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
         className={classes.content}
         onSubmit={handleSubmit}
         autoComplete='off'>
-        <TextField
-          id='modal-title'
-          label='Title'
-          value={title}
-          onChange={handleTitleChange}
-          required
-          fullWidth
-        />
-        <Autocomplete
-        id='modal-category'
-          value={category}
-          onChange={(event, newValue) => {
-            // Create a new value from the user input
-            if (newValue && newValue.inputValue) {
-              setCategory({
-                title: newValue.inputValue,
-              });
-
-              return;
-            }
-
-            setCategory(newValue);
-          }}
-          filterOptions={(options, params) => {
-            const filtered = filter(options, params);
-
-            // Suggest the creation of a new value
-            if (params.inputValue !== '') {
-              filtered.push({
-                inputValue: params.inputValue,
-                title: `Add "${params.inputValue}"`,
-              });
-            }
-
-            return filtered;
-          }}
-          selectOnFocus
-          clearOnBlur
-          handleHomeEndKeys
-          options={categories}
-          getOptionLabel={(option) => {
-            // Value selected with enter, right from the input
-            if (typeof option === 'string') {
-              return option;
-            }
-            // Add "xxx" option created dynamically
-            if (option.inputValue) {
-              return option.inputValue;
-            }
-            // Regular option
-            return option.title;
-          }}
-          renderOption={(option) => <TaskTypeChip id={option.title} title={option.title} color={option.color } />}
-          renderInput={(params) => (
-            <TextField {...params} label="Category" />
-          )}
-          freeSolo
-        />
-        <TextField 
-        id='modal-description'
-        label="Description"
-        multiline
-        value={description}
-        onChange={handleDescritionChange}
-        rows={4}
-        />
+        <TitleField title={title} setTitle={setTitle} isEdit={true}/>
+        <CategoryField isEdit category={category} setCategory={setCategory} categories={categories}/>
+        <DescriptionField isEdit description={description} setDescription={setDescription}/>
         <div id='modal-body' className={classes.actions} >
           <Button
             id='close-create-task-modal-button'

@@ -17,6 +17,8 @@ const TaskBoard = (props) => {
         state={state.index}
         borderRight={index + 1 === props.states.length}
         tasks={tasks}
+        categories={props.categories}
+        onSave={(task) => props.onSaved(task)}
         moveTask={(taskId, newState) => props.onTaskMoved(taskId, newState)} />
     )
   })
@@ -39,13 +41,15 @@ TaskBoard.propTypes = {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks,
-    states: state.states
+    states: state.states,
+    categories: state.categories
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTaskMoved: (taskId, newState) => dispatch(actions.moveTask(taskId, newState))
+    onTaskMoved: (taskId, newState) => dispatch(actions.moveTask(taskId, newState)),
+    onSaved: (task) => dispatch(actions.updateTask(task)),
   }
 }
 

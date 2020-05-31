@@ -16,3 +16,10 @@ export const moveTask = (id, newState) => {
     newState: newState
   }
 }
+
+export const updateTask = (task) => {
+  return {
+    type: actionTypes.TASK_UPDATE,
+    task: task
+  }
+}

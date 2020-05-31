@@ -1,1 +1,1 @@
-export { addNew, moveTask } from './task'
+export { addNew, moveTask, updateTask } from './task'

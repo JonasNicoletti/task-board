@@ -33,7 +33,9 @@ const TaskBoardColumn = (props) => {
     .map(task => <Task
       task={task}
       key={task.id} 
-      moveTask={props.moveTask} 
+      moveTask={props.moveTask}
+      categories={props.categories}
+      onSave={props.onSave}
       />)
     .reduce((arr, el) => arr.concat(el), [])
   return (
@@ -67,7 +69,9 @@ TaskBoardColumn.propTypes = {
   title: PropTypes.string,
   state: PropTypes.number,
   tasks: PropTypes.array,
-  moveTask: PropTypes.func
+  moveTask: PropTypes.func,
+  categories: PropTypes.array,
+  onSave: PropTypes.func
 }
 
 export default TaskBoardColumn
