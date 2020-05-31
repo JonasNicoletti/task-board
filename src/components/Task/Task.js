@@ -31,6 +31,7 @@ const Task = (props) => {
     props.task.category ? props.task.category : ""
   );
   const [description, setDescription] = React.useState(props.task.description);
+  const [showError, setShowError] = React.useState(false);
 
   const shadowColors = [
     "rgb(242, 11, 11)",
@@ -82,18 +83,24 @@ const Task = (props) => {
     setTitle(props.task.title);
     setCategory(props.task.category);
     setDescription(props.task.description);
+    setShowError(false);
     setIsEdit(false);
   };
 
   const handleSave = () => {
-    const updatedTask = {
-      ...props.task,
-      title: title,
-      category: category,
-      description: description,
-    };
-    props.onSave(updatedTask);
-    setIsEdit(false);
+    if (title) {
+      const updatedTask = {
+        ...props.task,
+        title: title,
+        category: category,
+        description: description,
+      };
+      props.onSave(updatedTask);
+      setShowError(false)
+      setIsEdit(false);
+    } else {
+      setShowError(true)
+    }
   };
 
   var titleField = (
@@ -102,6 +109,7 @@ const Task = (props) => {
       setTitle={setTitle}
       setIsEdit={setIsEdit}
       isEdit={isEdit}
+      showError={showError}
     />
   );
 

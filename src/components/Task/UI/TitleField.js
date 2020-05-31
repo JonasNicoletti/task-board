@@ -4,6 +4,7 @@ import {
   Box,
   Typography,
   IconButton,
+  FormHelperText,
   makeStyles,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -22,6 +23,7 @@ const TitleField = (props) => {
   };
 
   return props.isEdit ? (
+    <div>
     <TextField
       id="task-input-title"
       onChange={handleTitleChange}
@@ -35,12 +37,14 @@ const TitleField = (props) => {
         },
       }}
     />
+    {props.showError ? <FormHelperText error data-cy="title-error-text">Title is a required field.</FormHelperText> : null}
+    </div>
   ) : (
     <Box display="flex">
       <Typography align="left" class="task-title" variant="h4">
         {props.title}
       </Typography>
-      <IconButton onClick={() => props.setIsEdit(true)}>
+      <IconButton data-cy="edit" onClick={() => props.setIsEdit(true)}>
         <EditIcon />
       </IconButton>
     </Box>

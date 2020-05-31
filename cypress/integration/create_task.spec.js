@@ -170,4 +170,23 @@ describe("create a new task", () => {
       .should("have.css", "background-color")
       .and("eq", "rgb(54, 38, 167)");
   });
+
+  it("create task with description", () => {
+    const typedTitle = "Task Title";
+    const typedDescription = "Task Description";
+
+    cy.visit("/");
+
+    // START create task with description
+    cy.get("#open-create-task-modal-button").click();
+
+    cy.get("#task-input-title").type(typedTitle);
+
+    cy.get("#task-input-description").type(typedDescription);
+
+    cy.get("#save-create-task-modal-button").click();
+
+    cy.get(".task-description").contains(typedDescription);
+
+  })
 });

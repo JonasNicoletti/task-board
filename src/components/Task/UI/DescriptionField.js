@@ -8,7 +8,7 @@ const DescriptionField = ({ isEdit, description, setDescription }) => {
 
   return isEdit ? (
     <TextField
-      id="modal-description"
+      id="task-input-description"
       label="Description"
       multiline
       fullWidth
@@ -17,7 +17,7 @@ const DescriptionField = ({ isEdit, description, setDescription }) => {
       rows={4}
     />
   ) : (
-    <Typography variant="body2" gutterBottom>
+    <Typography class="task-description" variant="body2" gutterBottom>
       {description}
     </Typography>
   );
