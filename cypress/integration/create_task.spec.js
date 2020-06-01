@@ -52,7 +52,7 @@ describe("create a new task", () => {
 
     cy.get("#create-task-modal").should("not.be.visible");
 
-    cy.get(".task-title").contains(typedText);
+    cy.get("[data-cy=task-title]").contains(typedText);
   });
 
   it("create task with category", () => {

@@ -15,7 +15,7 @@ describe("edit task", () => {
 
     cy.get("#save-create-task-modal-button").click();
 
-    cy.get(".task-title").contains(typedTitle);
+    cy.get("[data-cy=task-title]").contains(typedTitle);
   });
 
   it("remove category", () => {

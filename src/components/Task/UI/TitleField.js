@@ -41,7 +41,7 @@ const TitleField = (props) => {
     </div>
   ) : (
     <Box display="flex">
-      <Typography align="left" class="task-title" variant="h4">
+      <Typography align="left" data-cy="task-title" variant="h4">
         {props.title}
       </Typography>
       <IconButton data-cy="edit" onClick={() => props.setIsEdit(true)}>
