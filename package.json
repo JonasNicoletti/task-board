@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "cypress": "^4.7.0",
-    "cypress-react-unit-test": "^4.4.0",
+    "cypress-react-unit-test": "^4.4.2",
     "gh-pages": "^3.0.0",
     "http-server": "^0.12.3",
     "start-server-and-test": "^1.11.0"
