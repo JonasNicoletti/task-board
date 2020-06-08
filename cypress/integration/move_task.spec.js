@@ -1,18 +1,26 @@
 /* eslint-disable no-undef */
 describe('move task', () => {
-  before(() => {
-    cy.visit('/')
-    cy
-      .get('#open-create-task-modal-button')
-      .click()
-    cy
-      .get('#task-input-title')
-      .type('Title')
+  beforeEach(function () {
+    // Fetch fixtures.
+    cy.fixture("initStates").as("statesQuery");
+  });
 
+  beforeEach(function () {
+    // Fetch fixtures.
+    cy.mockGraphQL([this.statesQuery]);
+    cy.visit('/');
     cy
-      .get('#save-create-task-modal-button')
-      .click()
-  })
+    .get('#open-create-task-modal-button')
+    .click()
+  cy
+    .get('#task-input-title')
+    .type('Title')
+
+  cy
+    .get('#save-create-task-modal-button')
+    .click()
+  });
+
 
   it(' moving task backwars when in 1st column does not change the tasks state', () => {
     // one task in the first column

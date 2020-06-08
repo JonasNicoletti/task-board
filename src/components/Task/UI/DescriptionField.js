@@ -17,7 +17,7 @@ const DescriptionField = ({ isEdit, description, setDescription }) => {
       rows={4}
     />
   ) : (
-    <Typography class="task-description" variant="body2" gutterBottom>
+    <Typography className="task-description" variant="body2" gutterBottom>
       {description}
     </Typography>
   );

@@ -12,6 +12,7 @@
     "@testing-library/react": "^10.2.0",
     "@testing-library/user-event": "^11.0.0",
     "apollo-boost": "^0.4.9",
+    "cy-mock-graphql": "^1.2.3",
     "graphql": "^15.1.0",
     "moment": "^2.26.0",
     "prop-types": "^15.7.2",

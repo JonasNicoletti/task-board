@@ -1,9 +1,18 @@
 /* eslint-disable no-undef */
 
 describe("create a new task", () => {
-  it("open modal when click on open", () => {
-    cy.visit("/");
+  beforeEach(function () {
+    // Fetch fixtures.
+    cy.fixture("initStates").as("statesQuery");
+  });
 
+  beforeEach(function () {
+    // Fetch fixtures.
+    cy.mockGraphQL([this.statesQuery]);
+    cy.visit('/');
+  });
+
+  it("open modal when click on open", () => {
     cy.get("#create-task-modal").should("not.be.visible");
 
     cy.get("#open-create-task-modal-button").click();
@@ -12,8 +21,6 @@ describe("create a new task", () => {
   });
 
   it("close modal when click on close button", () => {
-    cy.visit("/");
-
     cy.get("#open-create-task-modal-button").click();
 
     cy.get("#create-task-modal").should("be.visible");
@@ -24,8 +31,6 @@ describe("create a new task", () => {
   });
 
   it("validate input when click on save button", () => {
-    cy.visit("/");
-
     cy.get("#open-create-task-modal-button").click();
 
     cy.get("#create-task-modal").should("be.visible");
@@ -37,8 +42,6 @@ describe("create a new task", () => {
 
   it("create task when click on save button", () => {
     const typedText = "Task Title";
-
-    cy.visit("/");
 
     cy.get("#task-input-title").should("not.be.visible");
 
@@ -58,8 +61,6 @@ describe("create a new task", () => {
   it("create task with category", () => {
     const typedText = "Task Title";
     const typedCat = "Category";
-
-    cy.visit("/");
 
     cy.get("#open-create-task-modal-button").click();
 
@@ -86,8 +87,6 @@ describe("create a new task", () => {
   it("create task with existing category", () => {
     const typedText = "Task Title";
     const typedCat = "Category";
-
-    cy.visit("/");
 
     // START create task with category
     cy.get("#open-create-task-modal-button").click();
@@ -129,8 +128,6 @@ describe("create a new task", () => {
     const typedText = "Task Title";
     const typedCat1 = "Category 1";
     const typedCat2 = "Category 2";
-
-    cy.visit("/");
 
     // START create task with category 1
     cy.get("#open-create-task-modal-button").click();
@@ -175,8 +172,6 @@ describe("create a new task", () => {
     const typedTitle = "Task Title";
     const typedDescription = "Task Description";
 
-    cy.visit("/");
-
     // START create task with description
     cy.get("#open-create-task-modal-button").click();
 
@@ -187,6 +182,5 @@ describe("create a new task", () => {
     cy.get("#save-create-task-modal-button").click();
 
     cy.get(".task-description").contains(typedDescription);
-
-  })
+  });
 });

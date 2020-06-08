@@ -1,5 +1,15 @@
 /* eslint-disable no-undef */
 describe("edit task", () => {
+  beforeEach(function () {
+    // Fetch fixtures.
+    cy.fixture("initStates").as("statesQuery");
+  });
+
+  beforeEach(function () {
+    // Fetch fixtures.
+    cy.mockGraphQL([this.statesQuery]);
+    cy.visit("/");
+  });
   it("edit title", () => {
     const typedTitle = "updated title";
 
@@ -100,11 +110,11 @@ describe("edit task", () => {
     cy.get("#save-create-task-modal-button").click();
 
     cy.get(".task-category").should("be.visible").contains(typedCat2);
-  }); 
-  
+  });
+
   it("edit description", () => {
     const typedTitle = "title";
-    const typedDescription1= "desc 1";
+    const typedDescription1 = "desc 1";
     const typedDescription2 = "desc 2";
 
     cy.visit("/");
@@ -123,7 +133,9 @@ describe("edit task", () => {
 
     cy.get("#save-create-task-modal-button").click();
 
-    cy.get(".task-description").should("be.visible").contains(typedDescription1);
+    cy.get(".task-description")
+      .should("be.visible")
+      .contains(typedDescription1);
 
     cy.get("[data-cy=edit]").click();
 
@@ -131,9 +143,11 @@ describe("edit task", () => {
 
     cy.get("#save-create-task-modal-button").click();
 
-    cy.get(".task-description").should("be.visible").contains(typedDescription2);
-  }); 
-  
+    cy.get(".task-description")
+      .should("be.visible")
+      .contains(typedDescription2);
+  });
+
   it("should not be able to save without title", () => {
     const typedTitle = "title";
 
@@ -152,6 +166,5 @@ describe("edit task", () => {
     cy.get("#save-create-task-modal-button").click();
 
     cy.get("[data-cy=title-error-text]").should("be.visible");
-
   });
 });

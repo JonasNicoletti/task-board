@@ -1,0 +1,33 @@
+{
+  "operation": "initStates",
+  "response": {
+    "data": {
+      "states": [
+        {
+          "id": "1",
+          "name": "to-do",
+          "index": 0,
+          "__typename": "State"
+        },
+        {
+          "id": "2",
+          "name": "doing",
+          "index": 1,
+          "__typename": "State"
+        },
+        {
+          "id": "3",
+          "name": "review",
+          "index": 2,
+          "__typename": "State"
+        },
+        {
+          "id": "4",
+          "name": "done",
+          "index": 3,
+          "__typename": "State"
+        }
+      ]
+    }
+  }
+}
