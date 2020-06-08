@@ -3,12 +3,7 @@ import moment from "moment";
 
 const initialState = {
   tasks: [],
-  states: [
-    { index: 0, title: "TO-DO" },
-    { index: 1, title: "IN PROGRESS" },
-    { index: 2, title: "REVIEW" },
-    { index: 3, title: "DONE" },
-  ],
+  states: [],
   categories: [],
   categoriesColors: [
     "#FF331F",
@@ -98,6 +93,11 @@ const reducer = (state = initialState, action) => {
           ? state.categoriesColors.filter((_, index) => index > 0)
           : [...state.categoriesColors],
       };
+    case actionTypes.INIT_STATES:
+      return {
+        ...state,
+        states: action.states
+      }
     default:
       return state;
   }

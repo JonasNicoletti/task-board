@@ -23,3 +23,10 @@ export const updateTask = (task) => {
     task: task
   }
 }
+
+export const initStates = (states) => {
+  return {
+    type: actionTypes.INIT_STATES,
+    states: states
+  }
+}
