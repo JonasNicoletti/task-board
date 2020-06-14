@@ -22,7 +22,7 @@ const TaskBoardColumn = (props) => {
 
   const [, drop] = useDrop({
     accept: 'task',
-    drop: (data) => props.moveTask(data.id, props.state),
+    drop: (data) => props.moveTask(data.id, props.state.index),
     collect: mon => ({
       isOver: !!mon.isOver(),
     }),

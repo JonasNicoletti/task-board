@@ -35,7 +35,12 @@ const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    onSave(title, category, description)
+    const task = {
+      title: title,
+      category: category,
+      description: description
+    }
+    onSave(task)
   }
 
   const resetFields = () => {

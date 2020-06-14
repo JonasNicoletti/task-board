@@ -33,8 +33,9 @@ const Layout = (props) => {
     setOpen(false)
   }
 
-  const handleSave = (title, category, description) => {
-    props.onTaskAdded(title, category, description)
+  const handleSave = (task) => {
+    console.log(task);
+    props.onTaskAdded(task)
     setOpen(false)
   }
 
@@ -81,7 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTaskAdded: (title, category, description) => dispatch(actions.addNew(title, category, description))
+    onTaskAdded: (task) => dispatch(actions.addNewTask(task))
   }
 }
 

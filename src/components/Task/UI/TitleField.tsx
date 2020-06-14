@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import {
   TextField,
   Box,
@@ -14,15 +14,24 @@ const useStyles = makeStyles({
     fontSize: 35,
   },
 });
-const TitleField = (props) => {
+
+type TitleFieldProp = {
+  setTitle: Function,
+  setIsEdit: Function,
+  isEdit: boolean,
+  showError: boolean,
+  title: string
+
+}
+const TitleField: FunctionComponent<TitleFieldProp> = ({setTitle, setIsEdit, isEdit, title, showError}) => {
   const classes = useStyles();
 
 
-  const handleTitleChange = (event) => {
-    props.setTitle(event.target.value);
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.currentTarget.value);
   };
 
-  return props.isEdit ? (
+  return isEdit ? (
     <div>
     <TextField
       id="task-input-title"
@@ -30,21 +39,21 @@ const TitleField = (props) => {
       required
       fullWidth
       label="Title"
-      value={props.title}
+      value={title}
       InputProps={{
         classes: {
           input: classes.resize,
         },
       }}
     />
-    {props.showError ? <FormHelperText error data-cy="title-error-text">Title is a required field.</FormHelperText> : null}
+    {showError ? <FormHelperText error data-cy="title-error-text">Title is a required field.</FormHelperText> : null}
     </div>
   ) : (
     <Box display="flex">
       <Typography align="left" data-cy="task-title" variant="h4">
-        {props.title}
+        {title}
       </Typography>
-      <IconButton data-cy="edit" onClick={() => props.setIsEdit(true)}>
+      <IconButton data-cy="edit" onClick={() => setIsEdit(true)}>
         <EditIcon />
       </IconButton>
     </Box>

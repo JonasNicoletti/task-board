@@ -54,9 +54,9 @@ const Task = (props) => {
     },
     card: {
       boxShadow: `2px 2px 1px 1px ${
-        shadowColors[props.task.state]
-      },1px 1px 1px 1px ${shadowColors[props.task.state]},0px 1px 10px 1px ${
-        shadowColors[props.task.state]
+        shadowColors[props.task.state.index]
+      },1px 1px 1px 1px ${shadowColors[props.task.state.index]},0px 1px 10px 1px ${
+        shadowColors[props.task.state.index]
       }`,
     },
     cardActions: {
@@ -156,14 +156,15 @@ const Task = (props) => {
   ) : (
     <Box display="flex" className={classes.cardActions}>
       <IconButton
-        onClick={() => props.moveTask(props.task.id, props.task.state - 1)}
+        onClick={() => props.moveTask(props.task.id, props.task.state.index - 1)}
         id="move-task-backward"
       >
         <ArrowLeft />
       </IconButton>
       <IconButton
         className={classes.cardAction}
-        onClick={() => props.moveTask(props.task.id, props.task.state + 1)}
+        // eslint-disable-next-line no-undef
+        onClick={() => props.moveTask(props.task.id, props.task.state.index + 1)}
         id="move-task-forward"
       >
         <ArrowRight />

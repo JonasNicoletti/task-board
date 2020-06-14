@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 
 import "./index.css";
 import App from "./App";
-import taskReducer from "./store/reducers/taskReducer";
+import {taskReducer} from "./store/reducers/taskReducer";
 import { createStore } from "redux";
 
 import * as serviceWorker from "./serviceWorker";
@@ -23,7 +23,7 @@ const store = createStore(taskReducer);
 const app = (
   <Provider store={store}>
     <DndProvider backend={HTML5Backend}>
-      <BrowserRouter basename="/task-board">
+      <BrowserRouter >
         <MuiThemeProvider theme={responsiveFontSizes(theme)}>
           <CssBaseline />
           <App />

@@ -16,9 +16,18 @@ const TaskBoard = (props) => {
     }
   });
 
+  const handleTaskMoved = (taskId, stateIndex) => {
+    const task = props.tasks.find(t => t.id === taskId)
+    const newState = props.states.find(s => s.index === stateIndex)
+    if (task && newState) {
+      task.state = newState
+      props.onTaskMoved(task)
+    }
+  }
+
   const columns = props.states
     .map((state, index) => {
-      const tasks = props.tasks.filter((t) => t.state === state.index);
+      const tasks = props.tasks.filter((t) => t.state.index === state.index);
       return (
         <TaskBoardColumn
           key={index}
@@ -28,9 +37,9 @@ const TaskBoard = (props) => {
           tasks={tasks}
           categories={props.categories}
           onSave={(task) => props.onSaved(task)}
-          moveTask={(taskId, newState) => props.onTaskMoved(taskId, newState)}
-        />
-      );
+          moveTask={(taskid, stateIndex) => handleTaskMoved(taskid, stateIndex)}
+          />
+          );
     })
     .reduce((arr, el) => arr.concat(el), []);
 
@@ -62,8 +71,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTaskMoved: (taskId, newState) =>
-      dispatch(actions.moveTask(taskId, newState)),
+    onTaskMoved: (task) =>
+      dispatch(actions.moveTask(task)),
     onSaved: (task) => dispatch(actions.updateTask(task)),
     initStates: (states) => dispatch(actions.initStates(states))
   };
