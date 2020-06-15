@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { FunctionComponent } from 'react'
 import { Modal, makeStyles, Button } from '@material-ui/core'
 import SaveIcon from '@material-ui/icons/Save'
 import CloseIcon from '@material-ui/icons/Close'
@@ -7,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import TitleField from './UI/TitleField'
 import CategoryField from './UI/CategoryField'
 import DescriptionField from './UI/DescriptionField'
+import { Category } from '../../store/types'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -27,13 +27,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
-  const classes = useStyles()
-  const [title, setTitle] = React.useState('')
-  const [description, setDescription] = React.useState()
-  const [category, setCategory] = React.useState(null);
+type CreateTaskModalProp = {
+  onSave: Function,
+  open: boolean,
+  onClose: React.ReactEventHandler<{}>,
+  categories: Category[]
+}
 
-  const handleSubmit = (event) => {
+const CreateTaskModal: FunctionComponent<CreateTaskModalProp> = ({ onSave, open, onClose, categories }) => {
+  const classes = useStyles()
+  const [title, setTitle] = React.useState<string>('')
+  const [description, setDescription] = React.useState<string>()
+  const [category, setCategory] = React.useState<Category>();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const task = {
       title: title,
@@ -45,7 +52,7 @@ const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
 
   const resetFields = () => {
     setTitle('')
-    setCategory(null)
+    setCategory(undefined)
   }
 
   return (
@@ -63,7 +70,7 @@ const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
         className={classes.content}
         onSubmit={handleSubmit}
         autoComplete='off'>
-        <TitleField title={title} setTitle={setTitle} isEdit={true}/>
+        <TitleField title={title} setTitle={setTitle} isEdit={true} setIsEdit={() => ({})}/>
         <CategoryField isEdit category={category} setCategory={setCategory} categories={categories}/>
         <DescriptionField isEdit description={description} setDescription={setDescription}/>
         <div id='modal-body' className={classes.actions} >
@@ -91,11 +98,4 @@ const CreateTaskModal = ({ onSave, open, onClose, categories }) => {
   )
 }
 
-CreateTaskModal.propTypes = {
-  onSave: PropTypes.func,
-  onClose: PropTypes.func,
-  open: PropTypes.bool,
-  categories: PropTypes.array
-}
-
-export default CreateTaskModal
+export default CreateTaskModal;

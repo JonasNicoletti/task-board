@@ -10,7 +10,7 @@ export interface Task {
 export interface Category {
     id?: number,
     title: string,
-    color: string
+    color?: string
 };
 
 export interface State {

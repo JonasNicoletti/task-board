@@ -1,8 +1,14 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Typography, TextField } from "@material-ui/core";
 
-const DescriptionField = ({ isEdit, description, setDescription }) => {
-  const handleDescritionChange = (event) => {
+type DescriptionFieldProp = {
+  isEdit: boolean,
+  description?: string,
+  setDescription: Function
+}
+
+const DescriptionField: FunctionComponent<DescriptionFieldProp> = ({ isEdit, description, setDescription }) => {
+  const handleDescritionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(event.target.value);
   };
 

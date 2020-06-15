@@ -19,7 +19,7 @@ type TitleFieldProp = {
   setTitle: Function,
   setIsEdit: Function,
   isEdit: boolean,
-  showError: boolean,
+  showError?: boolean,
   title: string
 
 }

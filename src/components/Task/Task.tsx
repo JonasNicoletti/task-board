@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import {
   Card,
   CardContent,
@@ -17,21 +17,31 @@ import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import { useDrag } from "react-dnd";
 import ArrowLeft from "@material-ui/icons/ArrowLeft";
 import ArrowRight from "@material-ui/icons/ArrowRight";
-import PropTypes from "prop-types";
 import moment from "moment";
 
 import TitleField from "./UI/TitleField";
 import CategoryField from "./UI/CategoryField";
 import DescriptionField from "./UI/DescriptionField";
+import { Task as Tasktype, Category } from "../../store/types";
 
-const Task = (props) => {
-  const [isEdit, setIsEdit] = React.useState(false);
-  const [title, setTitle] = React.useState(props.task.title);
-  const [category, setCategory] = React.useState(
-    props.task.category ? props.task.category : ""
-  );
-  const [description, setDescription] = React.useState(props.task.description);
-  const [showError, setShowError] = React.useState(false);
+type TaskProp = {
+  task: Tasktype;
+  onSave: Function;
+  categories: Category[];
+  moveTask: Function;
+};
+
+const Task: FunctionComponent<TaskProp> = ({
+  task,
+  onSave,
+  categories,
+  moveTask,
+}) => {
+  const [isEdit, setIsEdit] = React.useState<boolean>(false);
+  const [title, setTitle] = React.useState<string>(task.title);
+  const [category, setCategory] = React.useState<Category | undefined>(task.category);
+  const [description, setDescription] = React.useState<string | undefined>(task.description);
+  const [showError, setShowError] = React.useState<boolean>(false);
 
   const shadowColors = [
     "rgb(242, 11, 11)",
@@ -41,7 +51,7 @@ const Task = (props) => {
   ];
 
   const [{ opacity }, dragRef] = useDrag({
-    item: { type: "task", id: props.task.id },
+    item: { type: "task", id: task.id },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,
     }),
@@ -54,9 +64,9 @@ const Task = (props) => {
     },
     card: {
       boxShadow: `2px 2px 1px 1px ${
-        shadowColors[props.task.state.index]
-      },1px 1px 1px 1px ${shadowColors[props.task.state.index]},0px 1px 10px 1px ${
-        shadowColors[props.task.state.index]
+        shadowColors[task.state.index]
+      },1px 1px 1px 1px ${shadowColors[task.state.index]},0px 1px 10px 1px ${
+        shadowColors[task.state.index]
       }`,
     },
     cardActions: {
@@ -80,9 +90,9 @@ const Task = (props) => {
   const classes = useStyles();
 
   const handleClose = () => {
-    setTitle(props.task.title);
-    setCategory(props.task.category);
-    setDescription(props.task.description);
+    setTitle(title);
+    setCategory(category);
+    setDescription(description);
     setShowError(false);
     setIsEdit(false);
   };
@@ -90,16 +100,16 @@ const Task = (props) => {
   const handleSave = () => {
     if (title) {
       const updatedTask = {
-        ...props.task,
+        ...task,
         title: title,
         category: category,
         description: description,
       };
-      props.onSave(updatedTask);
-      setShowError(false)
+      onSave(updatedTask);
+      setShowError(false);
       setIsEdit(false);
     } else {
-      setShowError(true)
+      setShowError(true);
     }
   };
 
@@ -117,7 +127,7 @@ const Task = (props) => {
     <CategoryField
       category={category}
       setCategory={setCategory}
-      categories={props.categories}
+      categories={categories}
       isEdit={isEdit}
     />
   );
@@ -156,7 +166,7 @@ const Task = (props) => {
   ) : (
     <Box display="flex" className={classes.cardActions}>
       <IconButton
-        onClick={() => props.moveTask(props.task.id, props.task.state.index - 1)}
+        onClick={() => moveTask(task.id, task.state.index - 1)}
         id="move-task-backward"
       >
         <ArrowLeft />
@@ -164,7 +174,7 @@ const Task = (props) => {
       <IconButton
         className={classes.cardAction}
         // eslint-disable-next-line no-undef
-        onClick={() => props.moveTask(props.task.id, props.task.state.index + 1)}
+        onClick={() => moveTask(task.id, task.state.index + 1)}
         id="move-task-forward"
       >
         <ArrowRight />
@@ -189,7 +199,7 @@ const Task = (props) => {
                 display="block"
                 gutterBottom
               >
-                {isEdit ? null : moment(props.task.createdAt).fromNow()}
+                {isEdit ? null : moment(task.createdAt).fromNow()}
               </Typography>
             </Box>
           }
@@ -199,14 +209,6 @@ const Task = (props) => {
       </Card>
     </Container>
   );
-};
-
-Task.propTypes = {
-  moveTask: PropTypes.func,
-  task: PropTypes.object,
-  isDragging: PropTypes.bool,
-  categories: PropTypes.array,
-  onSave: PropTypes.func,
 };
 
 export default Task;
