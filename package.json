@@ -19,7 +19,7 @@
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
     "apollo-boost": "^0.4.9",
-    "cy-mock-graphql": "^1.2.3",
+    "cy-mock-graphql": "^1.2.6",
     "express": "^4.17.1",
     "graphql": "^15.1.0",
     "moment": "^2.26.0",
