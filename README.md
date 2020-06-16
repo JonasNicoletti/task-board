@@ -9,8 +9,8 @@ Reactjs app using:
 - [x] task description-
 - [x] task details as text
 - [x] edit task
-- [ ] sort task based on priority or oldest-newest first
-- [ ] connect to a Backend(RESTAPI or GraphQL ?)
+- [x] sort task based on priority or oldest-newest first
+- [x] connect to a Backend(RESTAPI or GraphQL ?)
 - [ ] add Auth
 
 
