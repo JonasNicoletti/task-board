@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import { Button, Typography, Toolbar, AppBar, makeStyles, IconButton } from '@material-ui/core'
 
@@ -9,8 +8,15 @@ import HomeIcon from '@material-ui/icons/Home'
 import AddIcon from '@material-ui/icons/AddBoxOutlined'
 import CreateTaskModal from '../components/Task/CreateTaskModal'
 import * as actions from '../store/actions'
+import { Task, Category, TaskState } from '../store/types'
+import { Dispatch } from 'redux'
 
-const Layout = (props) => {
+type LayoutProp = {
+  onTaskAdded: (task: Task) => void,
+  categories: Category[]
+}
+
+const Layout: FunctionComponent<LayoutProp> = ({onTaskAdded, categories, children}) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -25,18 +31,17 @@ const Layout = (props) => {
 
   const [open, setOpen] = React.useState(false)
 
-  const handleOpen = () => {
+  function handleOpen(): void {
     setOpen(true)
   }
 
-  const handleClose = () => {
+  function handleClose(): void {
     setOpen(false)
   }
 
-  const handleSave = (task) => {
-    console.log(task);
-    props.onTaskAdded(task)
-    setOpen(false)
+  function handleSave(task: Task): void {
+    onTaskAdded(task);
+    setOpen(false);
   }
 
   const classes = useStyles()
@@ -49,7 +54,7 @@ const Layout = (props) => {
               <HomeIcon color="action" />
             </IconButton>
           </NavLink>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6">
             Task-Board
           </Typography>
           <IconButton id='open-create-task-modal-button' onClick={handleOpen}>
@@ -61,28 +66,23 @@ const Layout = (props) => {
         </Toolbar>
       </AppBar>
       <div>
-        {props.children}
-        {open ? <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave}  categories={props.categories}/> : null }
+        {children}
+        {open ? <CreateTaskModal open={open} onClose={handleClose} onSave={handleSave}  categories={categories}/> : null }
       </div>
     </div>
   )
 }
 
-Layout.propTypes = {
-  onTaskAdded: PropTypes.func,
-  taskTypes: PropTypes.array,
-  children: PropTypes.node
-}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: TaskState) => {
   return {
     categories: state.categories
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onTaskAdded: (task) => dispatch(actions.addNewTask(task))
+    onTaskAdded: (task: Task) => dispatch(actions.addNewTask(task))
   }
 }
 
