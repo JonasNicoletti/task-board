@@ -1,5 +1,3 @@
-import moment from "moment";
-
 import {
   TaskActionTypes,
   TaskState,
@@ -9,7 +7,7 @@ import {
   INIT_STATES,
   Category,
   Task,
-  State
+  SET_TASKS
 } from '../types';
 
 const initialState: TaskState = {
@@ -27,6 +25,7 @@ const initialState: TaskState = {
     "#ff9800",
     "#795548",
   ],
+  refetch: false
 };
 
 export function taskReducer(state = initialState, action: TaskActionTypes): TaskState {
@@ -34,31 +33,9 @@ export function taskReducer(state = initialState, action: TaskActionTypes): Task
   let updatedTasks: Task[];
   switch (action.type) {
     case TASK_ADD_NEW:
-      if (action.payload.category?.title && !action.payload.category?.color) {
-        newCategory = {
-          title: action.payload.category.title,
-          color: state.categoriesColors[0],
-        };
-      }
-      //FIXME: should come from backend
-      const initState: State | undefined = state.states.find(s => s.index === 0)
-      var newTask: Task = {
-        title: action.payload.title,
-        id: Math.random(),
-        state: initState ? initState : {name:"", index:12},
-        createdAt: moment().toDate(),
-        category: newCategory ? newCategory : action.payload.category,
-        description: action.payload.description,
-      };
       return {
         ...state,
-        tasks: state.tasks.concat(newTask),
-        categories: newCategory
-          ? state.categories.concat(newCategory)
-          : [...state.categories],
-        categoriesColors: newCategory
-          ? state.categoriesColors.filter((_, index) => index > 0)
-          : [...state.categoriesColors],
+        refetch: true
       };
     case TASK_MOVE:
       if (action.payload.state.index < 0 || action.payload.state.index + 1 > state.states.length) {
@@ -82,7 +59,7 @@ export function taskReducer(state = initialState, action: TaskActionTypes): Task
         if (action.payload.category) {
           if (action.payload.category && !action.payload.category.color) {
             newCategory = {
-              title: action.payload.category.title,
+              name: action.payload.category.name,
               color: state.categoriesColors[0],
             };
           }
@@ -106,6 +83,12 @@ export function taskReducer(state = initialState, action: TaskActionTypes): Task
       return {
         ...state,
         states: action.payload
+      }
+    case SET_TASKS:
+      return {
+        ...state,
+        tasks: action.payload,
+        refetch: false
       }
     default:
       return state;

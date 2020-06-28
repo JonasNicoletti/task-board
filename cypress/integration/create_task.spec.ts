@@ -4,11 +4,13 @@ describe("create a new task", () => {
   beforeEach(function () {
     // Fetch fixtures.
     cy.fixture("initStates").as("statesQuery");
+    cy.fixture("getTasks").as("tasksQuery");
+    cy.fixture("createTask").as("taskMutation");
   });
 
   beforeEach(function () {
     // Fetch fixtures.
-    cy.mockGraphQL([this.statesQuery]);
+    cy.mockGraphQL([this.statesQuery, this.tasksQuery, this.taskMutation]);
     cy.visit('/');
   });
 
@@ -40,7 +42,7 @@ describe("create a new task", () => {
     cy.get("#create-task-modal").should("be.visible");
   });
 
-  it("create task when click on save button", () => {
+  it.only("create task when click on save button", () => {
     const typedText = "Task Title";
 
     cy.get("#task-input-title").should("not.be.visible");

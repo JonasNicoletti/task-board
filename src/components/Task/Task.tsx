@@ -199,7 +199,7 @@ const Task: FunctionComponent<TaskProp> = ({
                 display="block"
                 gutterBottom
               >
-                {isEdit ? null : moment(task.createdAt).fromNow()}
+                {isEdit ? null : moment(task.createdAt, '').fromNow()}
               </Typography>
             </Box>
           }

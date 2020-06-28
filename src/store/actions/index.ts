@@ -1,1 +1,1 @@
-export { addNewTask, moveTask, updateTask, initStates } from './task'
+export { addNewTask, moveTask, updateTask, initStates, setTasks } from './task'

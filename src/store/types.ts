@@ -8,8 +8,8 @@ export interface Task {
 };
 
 export interface Category {
-    id?: number,
-    title: string,
+    id?: string,
+    name: string,
     color?: string
 };
 
@@ -23,13 +23,15 @@ export interface TaskState {
     tasks: Task[],
     states: State[],
     categories: Category[],
-    categoriesColors: string[]
+    categoriesColors: string[],
+    refetch: boolean
 }
 
 export const TASK_ADD_NEW = 'TASK_ADD_NEW';
 export const TASK_MOVE = 'TASK_MOVE';
 export const TASK_UPDATE = 'TASK_UPDATE';
 export const INIT_STATES = 'INIT_STATES';
+export const SET_TASKS = 'SET_TASKS';
 
 interface AddNewTaskAction {
     type: typeof TASK_ADD_NEW,
@@ -47,5 +49,9 @@ interface InitStatesAction {
     type: typeof INIT_STATES,
     payload: State[]
 };
+interface SetTasksAction {
+    type: typeof SET_TASKS,
+    payload: Task[]
+};
 
-export type TaskActionTypes = AddNewTaskAction | MoveTaskAction | UpdateTaskAction | InitStatesAction
+export type TaskActionTypes = AddNewTaskAction | MoveTaskAction | UpdateTaskAction | InitStatesAction | SetTasksAction

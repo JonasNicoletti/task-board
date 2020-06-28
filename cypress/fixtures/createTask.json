@@ -1,0 +1,13 @@
+{
+    "operation": "createTask",
+    "response": {
+      "data": {
+        "createTask": {
+            "task": {
+
+            }
+        }
+      }
+    }
+  }
+  

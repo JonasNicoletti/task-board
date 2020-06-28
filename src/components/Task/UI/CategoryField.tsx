@@ -30,9 +30,9 @@ const CategoryField: FunctionComponent<CategoryFieldProp> = ({
       value={category || ''}
       onChange={(_event, newValue) => {
         // Create a new value from the user input
-        if (newValue && (newValue as Category).title && !(newValue as Category).color) {
+        if (newValue && (newValue as Category).name && !(newValue as Category).color) {
           setCategory({
-            title: (newValue as Category).title.replace(/^Add "/, "").replace(/.$/, ""),
+            name: (newValue as Category).name.replace(/^Add "/, "").replace(/.$/, ""),
           });
           return;
         } else {
@@ -45,7 +45,7 @@ const CategoryField: FunctionComponent<CategoryFieldProp> = ({
         // Suggest the creation of a new value
         if (params.inputValue !== "") {
           filtered.push({
-            title: `Add "${params.inputValue}"`,
+            name: `Add "${params.inputValue}"`,
           });
         }
 
@@ -61,15 +61,15 @@ const CategoryField: FunctionComponent<CategoryFieldProp> = ({
           return option;
         }
         // Add "xxx" option created dynamically
-        if (option.title) {
-          return option.title;
+        if (option.name) {
+          return option.name;
         }
         // Regular option
-        return option.title;
+        return option.name;
       }}
       renderOption={(option) => (
         <CategoryChip
-          title={option.title}
+          title={option.name}
           color={option.color}
         />
       )}
@@ -77,7 +77,7 @@ const CategoryField: FunctionComponent<CategoryFieldProp> = ({
       freeSolo
     />
   ) : category ? (
-    <CategoryChip title={category.title} color={category.color} />
+    <CategoryChip title={category.name} color={category.color} />
   ) : null;
 };
 
