@@ -64,7 +64,7 @@
   "devDependencies": {
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
-    "cypress": "^4.8.0",
+    "cypress": "^4.12.1",
     "cypress-react-unit-test": "^4.7.0",
     "gh-pages": "^3.0.0",
     "http-server": "^0.12.3",
