@@ -22,7 +22,7 @@
     "cy-mock-graphql": "^1.2.6",
     "express": "^4.17.1",
     "graphql": "^15.1.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dnd": "^11.1.3",
