@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^11.0.0",
     "@types/jest": "^26.0.0",
     "@types/node": "^14.0.13",
-    "@types/react": "^16.9.36",
+    "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.8",
     "apollo-boost": "^0.4.9",
     "cy-mock-graphql": "^1.2.6",
