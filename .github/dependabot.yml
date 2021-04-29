@@ -1,0 +1,46 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: cypress
+    versions:
+    - 6.3.0
+    - 6.4.0
+    - 6.5.0
+    - 6.6.0
+    - 6.7.1
+    - 6.8.0
+    - 7.0.0
+    - 7.0.1
+    - 7.1.0
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: "@types/jest"
+    versions:
+    - 26.0.20
+    - 26.0.21
+    - 26.0.22
+  - dependency-name: "@types/react"
+    versions:
+    - 16.14.2
+    - 16.14.3
+    - 16.14.4
+  - dependency-name: "@testing-library/react"
+    versions:
+    - 11.2.3
+    - 11.2.5
+  - dependency-name: "@material-ui/core"
+    versions:
+    - 4.11.3
+  - dependency-name: "@material-ui/lab"
+    versions:
+    - 4.0.0-alpha.57
+  - dependency-name: elliptic
+    versions:
+    - 6.5.3
